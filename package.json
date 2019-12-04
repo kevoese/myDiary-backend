@@ -21,7 +21,10 @@
   },
   "homepage": "https://github.com/kevoese/myDiary-backend#readme",
   "dependencies": {
+    "apollo-server-express": "^2.9.12",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
+    "express": "^4.17.1",
     "knex": "^0.20.3",
     "objection": "^2.0.2",
     "pg": "^7.14.0"
