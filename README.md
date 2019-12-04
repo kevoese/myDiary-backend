@@ -1,2 +1,2 @@
 # myDiary-backend
-myDiary backend design
+myDiary backend design using node and graphql
