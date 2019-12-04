@@ -1,1 +1,4 @@
-console.log('My diary Backend');
+import databaseConnection from './database';
+
+
+export default { databaseConnection };
