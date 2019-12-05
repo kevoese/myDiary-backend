@@ -10,6 +10,7 @@ export default gql`
         login(email: String!, password: String!): SignUpRes,
         verifyUser(verificationCode: String!): SignUpRes, 
         resendVerificationLink: String!,
+        updateProfile(name: String, bio: String, avatar: String, username: String): User, 
     }
     type SignUpRes {
         user: User!,

@@ -1,6 +1,6 @@
 import User from '../database/models/User';
 import { UserInputError, AuthenticationError } from 'apollo-server-express';
-import { validateLogin, validateSignUp } from '../validations';
+import { validateLogin, validateSignUp, validateProfile } from '../validations';
 import authenticate from '../auth';
 import { randomString } from '../utils';
 
@@ -27,9 +27,22 @@ const user = async (
   return authUser;
 };
 
+const updateProfile = async (
+  _: any,
+  args: any,
+  { token }: { token: string }
+) => {
+  // TODO AUTH Projection Authentication Pagination
+  const thisUser = await authenticate(token);
 
+  validateProfile(args, UserInputError);
 
-const signUp = async (_:any, args:any) => {
+  await thisUser.$query().patch(args);
+
+  return thisUser;
+};
+
+const signUp = async (_: any, args: any) => {
   // validation
   validateSignUp(args, UserInputError);
   // create user
@@ -42,7 +55,7 @@ const signUp = async (_:any, args:any) => {
   return newUser.response();
 };
 
-const login = async (_:any, args:any) => {
+const login = async (_: any, args: any) => {
   const { email, password } = args;
 
   // validation
@@ -64,7 +77,7 @@ const login = async (_:any, args:any) => {
   return thisUser.response();
 };
 
-const verifyUser = async (_:any, { verificationCode }:any) => {
+const verifyUser = async (_: any, { verificationCode }: any) => {
   const thisUser = await User.query()
     .findOne({
       emailVerified: verificationCode,
@@ -81,7 +94,11 @@ const verifyUser = async (_:any, { verificationCode }:any) => {
   };
 };
 
-const resendVerificationLink = async (_: any, __: any, { token }: { token: string }) => {
+const resendVerificationLink = async (
+  _: any,
+  __: any,
+  { token }: { token: string }
+) => {
   const thisUser = await authenticate(token);
 
   if (!thisUser.emailVerified) return 'Email has already been verified';
@@ -103,5 +120,6 @@ export default {
     login,
     verifyUser,
     resendVerificationLink,
+    updateProfile,
   },
 };

@@ -23,8 +23,8 @@ const transporter = nodemailer.createTransport({
 export const sendMailDev = async ({ email, subject, html, text }: MailArgs) => {
   let error = null;
   const data = {
-    from: '"Music App" <support@nusicApp.com>',
-    to: 'no-reply@musicApp.com',
+    from: '"My Diary" <support@myDiary.com>',
+    to: 'no-reply@myDiary.com',
     bcc: email,
     subject,
     html,
