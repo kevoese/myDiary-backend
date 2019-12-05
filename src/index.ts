@@ -1,26 +1,14 @@
 import * as express from 'express';
-import { ApolloServer,  gql } from 'apollo-server-express';
+import { ApolloServer } from 'apollo-server-express';
 import * as cors from 'cors';
 import databaseConnection from './database';
 import { PORT } from './env';
+import resolvers from './resolvers';
+import typeDefs from './typeDefs';
 
 const app = express();
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
-const typeDefs = gql`
-  type Query {
-    hello: String
-  }
-`;
- 
-// Provide resolver functions for your schema fields
-const resolvers = {
-  Query: {
-    hello: () => 'Hello world!',
-  },
-};
 
 const server = new ApolloServer({
   typeDefs,
