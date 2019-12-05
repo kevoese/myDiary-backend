@@ -4,9 +4,9 @@
   "description": "backend for mydiary app",
   "main": "src/index.js",
   "scripts": {
-    "db:migrate:make": "knex --knexfile src/database/knexfile.ts -x ts migrate:make",
-    "db:migrate:latest": "knex --knexfile src/database/knexfile.ts migrate:latest",
-    "db:migrate:rollback": "knex --knexfile src/database/knexfile.ts migrate:rollback",
+    "migrate:make": "knex -x ts migrate:make",
+    "migration": "knex migrate:latest",
+    "migrate:rollback": "knex migrate:rollback",
     "start": "ts-node src/index.ts",
     "dev": "nodemon src/index.ts"
   },
@@ -21,11 +21,16 @@
   },
   "homepage": "https://github.com/kevoese/myDiary-backend#readme",
   "dependencies": {
+    "@sendgrid/mail": "^6.4.0",
     "apollo-server-express": "^2.9.12",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "joi": "^14.3.1",
+    "jsonwebtoken": "^8.5.1",
     "knex": "^0.20.3",
+    "nodemailer": "^6.4.0",
     "objection": "^2.0.2",
     "pg": "^7.14.0"
   },
@@ -33,8 +38,12 @@
     "@types/bcryptjs": "^2.4.2",
     "@types/express": "^4.17.2",
     "@types/graphql": "^14.5.0",
+    "@types/joi": "^14.3.4",
+    "@types/jsonwebtoken": "^8.3.5",
     "@types/knex": "^0.16.1",
     "@types/node": "^12.12.14",
+    "@types/nodemailer": "^6.2.2",
+    "nodemon": "^2.0.1",
     "ts-node": "^8.5.4",
     "typescript": "^3.7.2"
   }
